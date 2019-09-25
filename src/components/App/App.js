@@ -1,7 +1,12 @@
 import React from 'react';
 import './App.css';
+import { Button } from 'semantic-ui-react';
+import { useAction } from 'src/hooks/actionHooks';
+import actions from 'src/redux/actions';
 
-function App() {
+const App = () => {
+    const getImages = useAction(actions.getImages);
+
     return (
         <div className="App">
             <header className="App-header">
@@ -18,9 +23,10 @@ and save to reload.
                 >
           Learn React
                 </a>
+                <Button onClick={getImages}>asdas</Button>
             </header>
         </div>
     );
-}
+};
 
 export default App;

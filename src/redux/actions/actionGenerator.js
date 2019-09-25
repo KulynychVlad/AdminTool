@@ -24,4 +24,5 @@ export const actionCreator = (constant) => {
 };
 
 export const actionGenerator = actions => Object.assign({}, ...actions.map(actionCreator));
+
 export const generateActions = collection => actionGenerator(flatten(Object.values(collection)));
