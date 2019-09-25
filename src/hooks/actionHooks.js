@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 
 export const useAction = (action) => {
     const dispatch = useDispatch();
-    const callback = useMemo(() => payload => dispatch(action({ payload })), [action]);
+    const callback = useMemo(() => payload => dispatch(action({ payload })), [action, dispatch]);
 
     return callback;
 };

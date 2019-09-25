@@ -4,6 +4,7 @@ import * as requests from 'src/api_layer/requests/images';
 
 export default function* actionWatcher() {
     yield takeLatest(actions.GET_IMAGES, getImagesSaga);
+    yield takeLatest(actions.ADD_IMAGE, addImageSaga);
 }
 
 function* getImagesSaga() {
@@ -12,5 +13,14 @@ function* getImagesSaga() {
         yield put(actions.getImagesSuccess({ payload: data.images }));
     } catch (error) {   
         yield put(actions.getImagesError());
+    }
+}
+
+function* addImageSaga({ payload }) {
+    try {
+        const { data } = yield call(requests.addImage, payload);
+        yield put(actions.addImageSuccess({ payload: data.image }));
+    } catch (error) {   
+        yield put(actions.addImageError());
     }
 }
