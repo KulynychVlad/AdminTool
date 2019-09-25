@@ -1,11 +1,16 @@
 .grid {
     display: flex;
     flex-wrap: wrap;
+
+    overflow-y: auto;
+    flex: 1 1 100%;
+    padding: 2px;
+
     &__item {
         flex-grow: 0;
         flex-shrink: 1;
         flex-basis: 25%;
-        padding: 5px;
+        padding: 2px;
 
         @media screen and (max-width: 1000px) {
             flex-basis: 50%;

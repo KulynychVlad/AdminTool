@@ -1,17 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import './Image.scss';
 
-const Image = ({ src }) => {
+const Image = (props) => {
     return (
         <div className='image-wrapper'>
-            <img src={src || 'https://www.w3schools.com/w3css/img_lights.jpg'} />
+            <img {...props}/>
         </div>
     );
 };
 
-Image.propTypes = {
-
+Image.defaultProps = {
+    src: 'https://www.w3schools.com/w3css/img_lights.jpg',
 };
 
 export default Image;
