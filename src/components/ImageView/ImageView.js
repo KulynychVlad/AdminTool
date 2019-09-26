@@ -5,6 +5,7 @@ import { Icon } from 'semantic-ui-react';
 import { useAction } from 'src/hooks/actionHooks';
 import actions from 'src/redux/actions';
 import AddImageForm from 'src/components//AddImageForm';
+import TooltipImage from 'src/components/TooltipImage';
 
 const ImageView = ({ image }) => {
     const [editMode, setEditMode] = useState(false);
@@ -18,16 +19,12 @@ const ImageView = ({ image }) => {
                 <div className='image-view__form'>
                     <AddImageForm afterSubmit={() => setEditMode(false)} onSubmit={editImage} initialValues={image}/>
                 </div>
-            ) : <img className='image-view__img' src={image.src}/>}
+            ) : (
+                <TooltipImage image={image}/>
+            )}
             <div className='image-view__toolbar'>
                 <Icon name='pencil' circular inverted link onClick={() => setEditMode(!editMode)}/>
-                {!editMode && (
-                <>
-                    <Icon name='mouse pointer' circular inverted link/>
-                    <Icon name='delete' color='red' circular inverted link onClick={() => deleteImage(image)}/>
-
-                </>
-                )} 
+                {!editMode && <Icon name='delete' color='red' circular inverted link onClick={() => deleteImage(image)}/>} 
             </div>
         </div>
     );
