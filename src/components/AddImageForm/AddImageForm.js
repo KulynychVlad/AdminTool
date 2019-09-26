@@ -4,7 +4,7 @@ import './AddImageForm.scss';
 import PropTypes from 'prop-types';
 
 const AddImageForm = ({ afterSubmit, onSubmit, initialValues }) => {
-    const [image, setImage] = useState(initialValues.src);
+    const [src, setImage] = useState(initialValues.src);
     const [description, setDescription] = useState(initialValues.description);
 
     const setImageDataUrl = (e) => {
@@ -18,14 +18,15 @@ const AddImageForm = ({ afterSubmit, onSubmit, initialValues }) => {
     const handleSubmit = () => {
         const data = {
             ...initialValues,
-            src: image,
+            src,
+            position: initialValues.src !== src ? undefined : initialValues.position,
             description,
         };
         onSubmit(data);
         afterSubmit();
     };
 
-    const isDisabled = () => initialValues.src === image && description === initialValues.description;
+    const isDisabled = () => initialValues.src === src && description === initialValues.description;
 
     return (
         <>
@@ -39,10 +40,10 @@ const AddImageForm = ({ afterSubmit, onSubmit, initialValues }) => {
                     <input value={description} placeholder='Description' onChange={e => setDescription(e.target.value)}/>
                 </Form.Field>
                 <Button primary type='submit' disabled={isDisabled()}>Submit</Button>
-                {image && (
+                {src && (
                     <Form.Field className='image-preview'>
                         <label>Preview</label>
-                        <img src={image}/>
+                        <img src={src}/>
                     </Form.Field>
                 )}
             </Form>

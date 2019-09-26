@@ -8,9 +8,16 @@
         max-height: inherit;
         min-height: 150px;
     }
+    &:hover {
+        .image-tooltip__tooltip {
+            opacity: 0.8;
+            cursor: grab;
+        }
+    }
     &__tooltip {
         background-color: whitesmoke;
-        opacity: 0.8;
+        transition: opacity 0.3s ease;
+        opacity: 0;
         padding: 10px;
         position: absolute;
     }
