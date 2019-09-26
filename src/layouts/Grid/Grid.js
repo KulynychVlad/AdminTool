@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Grid.scss';
+import imagesReducer from '../../redux/reducers/imagesReducer';
 
 const Grid = ({ children }) => {
     return (
         <div className='grid' >
-            {children.map(item => <div className='grid__item'>{item}</div>)}
+            {children.map(item => <div key={imagesReducer.id} className='grid__item'>{item}</div>)}
         </div>
     );
 };

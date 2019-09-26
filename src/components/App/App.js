@@ -3,18 +3,17 @@ import './App.css';
 import { useAction } from 'src/hooks/actionHooks';
 import actions from 'src/redux/actions';
 import Grid from 'src/layouts/Grid';
-import Image from 'src/components/Image';
-import AddImage from 'src/components/AddImage';
+import AddImageModal from 'src/components/AddImageModal';
 import Page from 'src/layouts/Page';
 import Header from 'src/components/Header';
 import { useSelector } from 'react-redux';
 import { getImagesState } from 'src/redux/selectors/imageSelectors';
+import ImageViewModal from 'src/components/ImageViewModal';
 
 const App = () => {
     const getImages = useAction(actions.getImages);
 
     const images = useSelector(getImagesState);
-    console.log('images: ', images);
 
     useEffect(() => {
         getImages();
@@ -24,7 +23,7 @@ const App = () => {
         <Page>
             <Header/>
             <Grid>       
-                {[<AddImage />, ...images.map(({ src }) => <Image src={src}/>)]}
+                {[<AddImageModal key='add-image'/>, ...images.map(image => <ImageViewModal key={image.id} image={image}/>)]}
             </Grid>
         </Page>
     );

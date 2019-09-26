@@ -9,8 +9,4 @@ const Image = (props) => {
     );
 };
 
-Image.defaultProps = {
-    src: 'https://www.w3schools.com/w3css/img_lights.jpg',
-};
-
 export default Image;
