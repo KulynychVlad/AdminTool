@@ -12,6 +12,7 @@ function* getImagesSaga() {
         const { data } = yield call(requests.getImages);
         yield put(actions.getImagesSuccess({ payload: data.images }));
     } catch (error) {   
+        console.log('error: ', error);
         yield put(actions.getImagesError());
     }
 }
@@ -19,7 +20,7 @@ function* getImagesSaga() {
 function* addImageSaga({ payload }) {
     try {
         const { data } = yield call(requests.addImage, payload);
-        yield put(actions.addImageSuccess({ payload: data.image }));
+        yield put(actions.addImageSuccess({ payload: data }));
     } catch (error) {   
         yield put(actions.addImageError());
     }
