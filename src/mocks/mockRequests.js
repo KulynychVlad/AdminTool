@@ -1,14 +1,18 @@
 import MockAdapter from 'axios-mock-adapter';
+import { getImages, addImage } from 'src/storage/imageStorage';
 
 const mocks = [
     {
         path: '/images',
-        callback: () => [200, { images: [{ hi: 1 }] }],
+        callback: () => [200, { images: getImages().map(JSON.parse) }],
         method: 'onGet',
     },
     {
         path: '/images',
-        callback: config => [200, config.data],
+        callback: (config) => {
+            addImage(config.data);
+            return [200, config.data];
+        },
         method: 'onPost',
     },
 ];
