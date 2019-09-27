@@ -4,6 +4,6 @@ import mockAPI from 'src/mocks/mockRequests';
 
 const baseURL = config[`API_HOST_${process.env.NODE_ENV}`];
 
-mockAPI(axios);
+mockAPI(axios); //remove to unmock api
 
 export const apiInstance = axios.create({ baseURL });
