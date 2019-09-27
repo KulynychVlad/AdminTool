@@ -9,7 +9,6 @@ export const addImage = (image) => {
     localStorage.setItem('images', JSON.stringify(newImages));
 };
 
-
 export const deleteImage = (image) => {
     const images = getImages();
     const newImages = images.filter(item => JSON.parse(item).id !== image.id);
