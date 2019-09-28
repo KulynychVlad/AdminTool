@@ -27,7 +27,7 @@ const App = () => {
                 <Loader active content='Loading...' />) 
                 : (
                     <Grid>       
-                        {[<AddImageModal key='add-image'/>, ...images.map(image => <ImageViewModal key={image.id} image={image}/>)]}
+                        {[<AddImageModal key='add-image'/>, ...images.map(image => <ImageViewModal key={image._id} image={image}/>)]}
                     </Grid>
                 )}
         </Page>
