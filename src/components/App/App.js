@@ -6,13 +6,14 @@ import AddImageModal from 'src/components/modals/AddImageModal';
 import Page from 'src/components/layouts/Page';
 import Header from 'src/components/elements/Header';
 import { useSelector } from 'react-redux';
-import { getImagesState } from 'src/redux/selectors/imageSelectors';
+import { getImagesState, getImagesLoadingState } from 'src/redux/selectors/imageSelectors';
 import ImageViewModal from 'src/components/modals/ImageViewModal';
 
 const App = () => {
     const getImages = useAction(actions.getImages);
 
     const images = useSelector(getImagesState);
+    const loading = useSelector(getImagesLoadingState);
 
     useEffect(() => {
         getImages();

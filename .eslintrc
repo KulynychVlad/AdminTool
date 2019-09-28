@@ -54,6 +54,7 @@
         "document": true,
         "localStorage": true,
         "FileReader": true,
+        "Blob": true
     },
     "parser": "babel-eslint"
 }

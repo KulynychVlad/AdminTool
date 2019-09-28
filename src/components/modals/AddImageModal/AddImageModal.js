@@ -22,6 +22,7 @@ const AddImageModal = () => {
         <Modal
             trigger={trigger}
             open={open}
+            centered={false}
             onOpen={openModal}
             onClose={closeModal}
         >

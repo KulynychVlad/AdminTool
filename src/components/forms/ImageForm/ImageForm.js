@@ -2,22 +2,22 @@ import React, { useState, useMemo } from 'react';
 import { Form, Button } from 'semantic-ui-react';
 import './ImageForm.scss';
 import PropTypes from 'prop-types';
-import { getImageDataUrl } from 'src/helpers/image';
+import ImageUpload from 'src/components/elements/ImageUpload';
+import { getSize } from 'src/helpers/localeStorage';
 
 const ImageForm = ({ afterSubmit, onSubmit, initialValues }) => {
-    const [src, setImage] = useState(initialValues.src);
-    const [description, setDescription] = useState(initialValues.description);
+    const [state, setState] = useState(initialValues);
 
-    const submitDisabled = useMemo(() => !src || (initialValues.src === src && description === initialValues.description),
-        [src, description, initialValues]);
+    const submitDisabled = useMemo(() => !state.src || (initialValues.src === state.src && state.description === initialValues.description),
+        [state, initialValues]);
 
-    const onImageChange = e => getImageDataUrl(e, setImage);
-    const onDescriptionChange = e => setDescription(e.target.value);
+    const handleDescriptionChange = e => setState({ ...state, description: e.target.value });
+    const handleImageChange = src => setState({ ...state, src });
 
     const handleSubmit = () => {
-        const isImageChanged = initialValues.src !== src;
+        const isImageChanged = initialValues.src !== state.src;
 
-        const data = { ...initialValues, src, description };
+        const data = { ...state };
 
         if (isImageChanged) data.position = undefined;
 
@@ -25,22 +25,27 @@ const ImageForm = ({ afterSubmit, onSubmit, initialValues }) => {
         afterSubmit();
     };
 
+    const getStateSize = () => (getSize(JSON.stringify(state)) / 1024 / 1024).toFixed(3);
+
     return (
         <>
             <Form onSubmit={handleSubmit}>
-                <Form.Field>
-                    <label>Image</label>
-                    <input type='file' placeholder='Image' accept="image/*" onChange={onImageChange} />
-                </Form.Field>
-                <Form.Field>
-                    <label>Description</label>
-                    <input value={description} placeholder='Description' onChange={onDescriptionChange}/>
-                </Form.Field>
-                <Button primary type='submit' disabled={submitDisabled}>Submit</Button>
-                {src && (
+                <Form.Group className='image-form__fields'>
+                    <ImageUpload onChange={handleImageChange}/>
+                    <Form.Input
+                        fluid
+                        className='image-form__fields__description'
+                        value={state.description}
+                        placeholder='Description'
+                        onChange={handleDescriptionChange}
+                        inline
+                    />
+                    <Button color='green' type='submit' disabled={submitDisabled} icon='check'/>
+                </Form.Group>
+                {state.src && (
                     <Form.Field className='image-preview'>
-                        <label>Preview</label>
-                        <img src={src}/>
+                        <label>{`Preview (${getStateSize()} MB)`}</label>
+                        <img src={state.src}/>
                     </Form.Field>
                 )}
             </Form>

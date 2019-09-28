@@ -37,7 +37,7 @@ const mocks = [
 ];
 
 export default (api) => {
-    const mock = new MockAdapter(api);
+    const mock = new MockAdapter(api, { delayResponse: 300 });
 
     mocks.forEach(({ method, path, callback }) => mock[method](path).reply(callback));
 };
