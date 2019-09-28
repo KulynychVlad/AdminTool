@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './TooltipImage.scss';
 import actions from 'src/redux/actions';
-import { useAction } from 'src/hooks/actionHooks';
+import { useLoadingAction } from 'src/hooks/actionHooks';
 import { getRelativeDropPosition, getOffsetPosition } from 'src/helpers/positions';
+import { Loader } from 'semantic-ui-react';
 
 const TooltipImage = ({ image }) => {
     const position = image.position || { top: 0, left: 0 };
 
-    const editImage = useAction(actions.editImage);
+    const [loading, loadingEditImage] = useLoadingAction(actions.editImage);
 
     const onDragEnd = (draggable) => {
         const droppable = document.querySelector('.image-tooltip');
@@ -16,7 +17,7 @@ const TooltipImage = ({ image }) => {
 
         const relativePosition = getRelativeDropPosition({ droppable, draggable, offset });
 
-        editImage({ ...image, position: relativePosition });
+        loadingEditImage({ ...image, position: relativePosition });
     };
 
     const onDragStart = (draggable) => {
@@ -42,6 +43,7 @@ const TooltipImage = ({ image }) => {
             >
                 {image.description || 'No description'}
             </div>
+            {loading && <Loader active/>}
         </div>
     );
 };

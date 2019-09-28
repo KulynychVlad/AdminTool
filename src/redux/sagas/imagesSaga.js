@@ -9,38 +9,46 @@ export default function* actionWatcher() {
     yield takeLatest(actions.EDIT_IMAGE, editImageSaga);
 }
 
-function* getImagesSaga() {
+function* getImagesSaga({ resolve, reject }) {
     try {
         const { data } = yield call(requests.getImages);
         yield put(actions.getImagesSuccess({ payload: data }));
+        yield call(resolve, data);
     } catch (error) {   
         yield put(actions.getImagesError());
+        yield call(reject, error);
     }
 }
 
-function* addImageSaga({ payload }) {
+function* addImageSaga({ payload, resolve, reject }) {
     try {
         const { data } = yield call(requests.addImage, payload);
         yield put(actions.addImageSuccess({ payload: data }));
+        yield call(resolve, data);
     } catch (error) {   
         yield put(actions.addImageError());
+        yield call(reject, error);
     }
 }
 
-function* deleteImageSaga({ payload }) {
+function* deleteImageSaga({ payload, resolve, reject }) {
     try {
         yield call(requests.deleteImage, payload);
         yield put(actions.deleteImageSuccess({ payload }));
+        yield call(resolve, payload);
     } catch (error) {   
         yield put(actions.deleteImageError());
+        yield call(reject, error);
     }
 }
 
-function* editImageSaga({ payload }) {
+function* editImageSaga({ payload, resolve, reject }) {
     try {
         const { data } = yield call(requests.editImage, payload);
         yield put(actions.editImageSuccess({ payload: data }));
+        yield call(resolve, data);
     } catch (error) {   
         yield put(actions.editImageError());
+        yield call(reject, error);
     }
 }
