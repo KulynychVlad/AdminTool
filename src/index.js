@@ -7,8 +7,6 @@ import { Provider } from 'react-redux';
 
 import 'semantic-ui-css/semantic.min.css';
 
-require('dotenv').config();
-
 const store = configureStore();
 
 ReactDOM.render(

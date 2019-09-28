@@ -39,7 +39,7 @@ const ImageView = ({ image }) => {
 ImageView.propTypes = {
     image: PropTypes.shape({
         src: PropTypes.string.isRequired,
-        id: PropTypes.string.isRequired,
+        _id: PropTypes.string.isRequired,
         description: PropTypes.string,
     }).isRequired,
 };

@@ -51,7 +51,7 @@ const TooltipImage = ({ image }) => {
 TooltipImage.propTypes = {
     image: PropTypes.shape({
         src: PropTypes.string.isRequired,
-        id: PropTypes.string.isRequired,
+        _id: PropTypes.string.isRequired,
         description: PropTypes.string,
         position: PropTypes.object,
     }).isRequired,

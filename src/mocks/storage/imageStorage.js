@@ -11,14 +11,14 @@ export const addImage = (image) => {
 
 export const deleteImage = (image) => {
     const images = getImages();
-    const newImages = images.filter(item => JSON.parse(item).id !== image.id);
+    const newImages = images.filter(item => JSON.parse(item)._id !== image._id);
     
     localStorage.setItem('images', JSON.stringify(newImages));
 };
 
 export const editImage = (image) => {
     const images = getImages();
-    const newImages = images.map(item => (JSON.parse(item).id === JSON.parse(image).id ? image : item));
+    const newImages = images.map(item => (JSON.parse(item)._id === JSON.parse(image)._id ? image : item));
     
     localStorage.setItem('images', JSON.stringify(newImages));
 };
