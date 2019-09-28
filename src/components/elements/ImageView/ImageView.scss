@@ -12,11 +12,12 @@
     }
     &__form {
         padding: 10px;
+        min-width: 250px;
         .image-preview {        
             img {
                 object-fit: contain;
                 max-width: 70vw;
-                min-width: 250px;
+                min-width: inherit;
                 max-height: 500px;
                 min-height: 100px;
             }

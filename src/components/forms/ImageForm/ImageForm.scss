@@ -1,6 +1,4 @@
 .image-preview {
-    margin-top: 10px!important;
-
     img {
         max-width: 100%;
     }
@@ -10,9 +8,18 @@
     &__fields {
         display: flex;
         align-items: center;
-        margin: 0!important;
-        &__description {
+        justify-content: space-between;
+
+        margin-bottom: 10px;
+        &__input {
             flex: 1 1 auto!important;
+        }
+        &__submit {
+            margin: 0 0 0 10px!important;
+        }
+        &__divider {
+            font-weight: bold;
+            margin: 0 10px;
         }
     }
 }

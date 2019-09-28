@@ -1,10 +1,10 @@
 import React, { useState, useMemo } from 'react';
-import { Form, Button } from 'semantic-ui-react';
+import { Form, Button, Input } from 'semantic-ui-react';
 import './ImageForm.scss';
 import PropTypes from 'prop-types';
 import ImageUpload from 'src/components/elements/ImageUpload';
-import { getSize } from 'src/helpers/localeStorage';
 import { useLoadingState } from 'src/hooks/stateHooks';
+import Image from 'src/components/elements/Image';
 
 const ImageForm = ({ afterSubmit, onSubmit, initialValues }) => {
     const [state, setState] = useState(initialValues);
@@ -27,29 +27,38 @@ const ImageForm = ({ afterSubmit, onSubmit, initialValues }) => {
 
     const handleDescriptionChange = e => setState({ ...state, description: e.target.value });
     const handleImageChange = src => setState({ ...state, src });
+    const handleImageUrlChange = e => setState({ ...state, src: e.target.value });
    
-
-    const getStateSize = () => (getSize(JSON.stringify(state)) / 1024 / 1024).toFixed(3);
-
     return (
         <>
             <Form onSubmit={handleSubmit}>
-                <Form.Group className='image-form__fields'>
+                <div className='image-form__fields'>
                     <ImageUpload onChange={handleImageChange}/>
-                    <Form.Input
+                    <div className='image-form__fields__divider'>OR</div>
+                    <Input
+                        placeholder='Image URL'
+                        className='image-form__fields__input'
+                        onChange={handleImageUrlChange}
+                        inline
                         fluid
-                        className='image-form__fields__description'
+                    />
+                </div>
+                <div className='image-form__fields'>
+                    <Input
+                        fluid
+                        className='image-form__fields__input'
                         value={state.description}
                         placeholder='Description'
                         onChange={handleDescriptionChange}
                         inline
                     />
-                    <Button loading={loading} color='green' type='submit' disabled={submitDisabled} icon='check'/>
-                </Form.Group>
+                    <Button className='image-form__fields__submit' loading={loading} color='green' type='submit' disabled={submitDisabled} icon='check'/>
+                </div>
+                
                 {state.src && (
                     <Form.Field className='image-preview'>
-                        <label>{`Preview (${getStateSize()} MB)`}</label>
-                        <img src={state.src}/>
+                        <label>Preview</label>
+                        <Image src={state.src}/>
                     </Form.Field>
                 )}
             </Form>

@@ -5,6 +5,7 @@ import actions from 'src/redux/actions';
 import { useLoadingAction } from 'src/hooks/actionHooks';
 import { getRelativeDropPosition, getOffsetPosition } from 'src/helpers/positions';
 import { Loader } from 'semantic-ui-react';
+import Image from 'src/components/elements/Image';
 
 const TooltipImage = ({ image }) => {
     const position = image.position || { top: 0, left: 0 };
@@ -34,7 +35,7 @@ const TooltipImage = ({ image }) => {
             onDragOver={e => e.preventDefault()}
             onDrop={onDragEnd}
         >
-            <img className='image-tooltip__img' src={image.src}/>
+            <Image className='image-tooltip__img' src={image.src}/>
             <div
                 style={{ left: `${position.left}%`, top: `${position.top}%` }}
                 onDragStart={onDragStart}
