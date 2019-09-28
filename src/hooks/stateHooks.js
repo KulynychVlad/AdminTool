@@ -16,3 +16,19 @@ export const useToggleState = (initialValue) => {
 
     return [state, toggleState];
 };
+
+export const useLoadingState = (request, initialValue) => {
+    const [loading, setLoading] = useState(initialValue);
+
+    const callWithLoader = async (payload) => {
+        try {
+            setLoading(true);
+            const result = await request(payload);
+            return result;
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return [loading, callWithLoader];
+};

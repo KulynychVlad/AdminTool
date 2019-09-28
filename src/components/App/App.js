@@ -1,30 +1,35 @@
 import React, { useEffect } from 'react';
-import { useAction } from 'src/hooks/actionHooks';
+import { useLoadingAction } from 'src/hooks/actionHooks';
 import actions from 'src/redux/actions';
 import Grid from 'src/components/layouts/Grid';
 import AddImageModal from 'src/components/modals/AddImageModal';
 import Page from 'src/components/layouts/Page';
 import Header from 'src/components/elements/Header';
 import { useSelector } from 'react-redux';
-import { getImagesState, getImagesLoadingState } from 'src/redux/selectors/imageSelectors';
+import { getImagesState } from 'src/redux/selectors/imageSelectors';
 import ImageViewModal from 'src/components/modals/ImageViewModal';
 
+import { Loader } from 'semantic-ui-react';
+
 const App = () => {
-    const getImages = useAction(actions.getImages);
+    const [loading, getImageLoading] = useLoadingAction(actions.getImages, true);
 
     const images = useSelector(getImagesState);
-    const loading = useSelector(getImagesLoadingState);
 
     useEffect(() => {
-        getImages();
+        getImageLoading();
     }, []);
 
     return (
         <Page>
             <Header/>
-            <Grid>       
-                {[<AddImageModal key='add-image'/>, ...images.map(image => <ImageViewModal key={image.id} image={image}/>)]}
-            </Grid>
+            {loading ? (
+                <Loader active content='Loading...' />) 
+                : (
+                    <Grid>       
+                        {[<AddImageModal key='add-image'/>, ...images.map(image => <ImageViewModal key={image.id} image={image}/>)]}
+                    </Grid>
+                )}
         </Page>
     );
 };
