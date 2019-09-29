@@ -1,0 +1,28 @@
+.image-wrapper {
+    &--add {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+    }
+    
+    &__text {
+        &--add {
+            position: absolute;
+            bottom: 10%;
+            color: #767676;
+
+            transition: opacity 0.3s ease;
+            opacity: 0;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+    }
+    &:hover {
+        .image-wrapper__text {
+            &--add {
+                opacity: 1;
+            }
+        } 
+    }
+}

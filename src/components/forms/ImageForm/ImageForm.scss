@@ -1,0 +1,25 @@
+.image-preview {
+    img {
+        max-width: 100%;
+    }
+}
+
+.image-form {
+    &__fields {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        margin-bottom: 10px;
+        &__input {
+            flex: 1 1 auto!important;
+        }
+        &__submit {
+            margin: 0 0 0 10px!important;
+        }
+        &__divider {
+            font-weight: bold;
+            margin: 0 10px;
+        }
+    }
+}
