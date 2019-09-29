@@ -39,7 +39,6 @@ const ImageForm = ({ afterSubmit, onSubmit, initialValues }) => {
                         placeholder='Image URL'
                         className='image-form__fields__input'
                         onChange={handleImageUrlChange}
-                        inline
                         fluid
                     />
                 </div>
@@ -50,7 +49,6 @@ const ImageForm = ({ afterSubmit, onSubmit, initialValues }) => {
                         value={state.description}
                         placeholder='Description'
                         onChange={handleDescriptionChange}
-                        inline
                     />
                     <Button className='image-form__fields__submit' loading={loading} color='green' type='submit' disabled={submitDisabled} icon='check'/>
                 </div>

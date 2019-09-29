@@ -6,10 +6,13 @@ import { useLoadingAction } from 'src/hooks/actionHooks';
 import { getRelativeDropPosition, getOffsetPosition } from 'src/helpers/positions';
 import { Loader } from 'semantic-ui-react';
 import Image from 'src/components/elements/Image';
+import { useSelector } from 'react-redux';
+import { getTooltipsColorState } from 'src/redux/selectors/settingsSelectors';
 
 const TooltipImage = ({ image }) => {
     const position = image.position || { top: 0, left: 0 };
 
+    const tooltipsColor = useSelector(getTooltipsColorState);
     const [loading, loadingEditImage] = useLoadingAction(actions.editImage);
 
     const onDragEnd = (draggable) => {
@@ -37,7 +40,7 @@ const TooltipImage = ({ image }) => {
         >
             <Image className='image-tooltip__img' src={image.src}/>
             <div
-                style={{ left: `${position.left}%`, top: `${position.top}%` }}
+                style={{ left: `${position.left}%`, top: `${position.top}%`, backgroundColor: tooltipsColor }}
                 onDragStart={onDragStart}
                 draggable='true'
                 className='image-tooltip__tooltip'
