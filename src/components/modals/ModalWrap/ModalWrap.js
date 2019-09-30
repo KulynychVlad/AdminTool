@@ -20,10 +20,7 @@ const ModalWrap = ({ children, ...restProps }) => {
 };
 
 ModalWrap.propTypes = {
-    children: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.node),
-        PropTypes.node,
-    ]).isRequired, 
+    children: PropTypes.func.isRequired, 
 };
 
 export default ModalWrap;
