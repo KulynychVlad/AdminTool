@@ -1,6 +1,6 @@
 import { takeLatest, put, call } from 'redux-saga/effects';
 import actions from 'src/redux/actions';
-import * as requests from 'src/api_layer/requests/images';
+import * as requests from 'src/api/requests/images';
 
 export default function* actionWatcher() {
     yield takeLatest(actions.GET_IMAGES, getImagesSaga);
