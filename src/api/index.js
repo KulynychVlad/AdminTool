@@ -1,5 +1,5 @@
 import axios from 'axios';
-import config from 'src/api_layer/urls';
+import config from 'src/api/urls';
 import mockAPI from 'src/mocks/mockRequests';
 
 const baseURL = config.API_HOST;

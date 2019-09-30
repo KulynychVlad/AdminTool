@@ -1,4 +1,5 @@
-import { camelCase, flatten } from 'lodash';
+import flatten from 'lodash.flatten';
+import camelCase from 'lodash.camelcase';
 
 const actionTemplate = type => payload => ({
     type, 
