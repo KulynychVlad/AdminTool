@@ -4,11 +4,9 @@ import { Icon, Modal } from 'semantic-ui-react';
 import ImageForm from 'src/components/forms/ImageForm';
 import actions from 'src/redux/actions';
 import { useAction } from 'src/hooks/actionHooks';
-import { useSwitchState } from 'src/hooks/stateHooks';
+import ModalWrap from 'src/components/modals/ModalWrap';
 
-const AddImageModal = () => {
-    const [open, openModal, closeModal] = useSwitchState(false);
-    
+const AddImageModal = () => {    
     const addImage = useAction(actions.addImage);
 
     const trigger = (
@@ -19,18 +17,19 @@ const AddImageModal = () => {
     );
 
     return (
-        <Modal
+        <ModalWrap
             trigger={trigger}
-            open={open}
             centered={false}
-            onOpen={openModal}
-            onClose={closeModal}
         >
-            <Modal.Header>Add image</Modal.Header>
-            <Modal.Content>            
-                <ImageForm onSubmit={addImage} afterSubmit={closeModal}/>
-            </Modal.Content>
-        </Modal>
+            {({ closeModal }) => (
+                <>
+                    <Modal.Header>Add image</Modal.Header>
+                    <Modal.Content>            
+                        <ImageForm onSubmit={addImage} afterSubmit={closeModal}/>
+                    </Modal.Content>
+                </>
+            )}
+        </ModalWrap>
     );
 };
 
